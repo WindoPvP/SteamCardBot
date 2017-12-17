@@ -8,5 +8,4 @@ npm install
 node bot.js
 
 
-#Note:
-Your credentials will be sent to the API. This is to check if you do have the API key. If you don't own an API Key don't worry. Credientials are not saved and are encrypted with a SHA256 hash algorithm in the process.
+#Note: There is a function "checkPaid()" that will check if you have paid for the paid version before. This function makes a request which it does not **save** any credentials. *If you have paid it will tell you how to update*.
